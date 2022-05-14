@@ -12,14 +12,23 @@
 		/>
 	</head>
 	<body>
-		<div class="container">
-			<h1 class="text-center">Worker lab.</h1>
 
+		<div class="container">
+			<!-- <h1 class='text-center'>Worker Tree</h1> -->
+			<div id="resMenu"></div>
+		</div>
+		<hr>		
+		<div class="container">
+			<h1 class="text-center">Worker lab</h1>
 			<div class="mb-3">
 				<input type="email" class="form" id="a" /> +
 				<input type="email" class="form" id="b" /> =
 				<strong id="result"></strong>
-			</div>
+			</div>			
+		</div>
+		<hr>
+		<div class="container">
+
 		</div>
 
 		<script
@@ -28,20 +37,43 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
-			// result.innerHTML = 0
+			// fetch('mock-request.json')
+			// 	.then(res => res.json())
+			// 	.then(result => console.log(result))
 
 			if ('Worker' in window) {
 				console.log('Worker есть!')
 				const worker = new Worker('lab_worker.js')
+				const workerTree = new Worker('workerTree.js')
+				const workerFetch = new Worker('worker-fetch.js')
+
+				const menu = {
+					'Главная': '/',
+					'Каталог1':{
+						'Категория 1': '/category1',
+						'Категория 2': {
+							'Подкатегория 2.1': '/subcategory2-1',
+							'Подкатегория 2.2': '/subcategory2-2',
+						}
+					},
+					'Каталог2':'/catalog2'
+				}
+
+				workerTree.postMessage(menu)
+				workerTree.addEventListener('message', ev => {
+					// console.log('ev.data = ', ev.data)
+
+					resMenu.innerHTML = ev.data
+				})
 
 				const changeInput = ev => {
-					console.log({
-						a: parseFloat(a.value),
-						b: parseFloat(b.value),						
-					}, 
-					'result =', result.innerHTML,
-					'worker =', worker
-					)
+					// console.log({
+					// 	a: parseFloat(a.value),
+					// 	b: parseFloat(b.value),						
+					// }, 
+					// 'result =', result.innerHTML,
+					// 'worker =', worker
+					// )
 
 					worker.postMessage({
 						a: parseFloat(a.value),
