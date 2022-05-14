@@ -28,9 +28,11 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
+			// result.innerHTML = 0
+
 			if ('Worker' in window) {
 				console.log('Worker есть!')
-				const worker = new Worker('worker.js')
+				const worker = new Worker('lab_worker.js')
 
 				const changeInput = ev => {
 					console.log({
