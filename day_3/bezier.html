@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<style>
+			canvas {
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="300"></canvas>
+		<script>
+			let canvas = document.querySelector('#canvas')
+			let ctx = canvas.getContext('2d')
+			console.log(ctx)
+
+			ctx.lineWidth = 5
+			ctx.lineStyle = 'red'
+			ctx.fillStyle = 'blue'
+			ctx.font = '35px sans-serif'
+
+			// const pixel = (ctx, x, y, r, c) => {
+			//   r = r / 2;
+			//   ctx.fillStyle = c;
+			//   ctx.beginPath();
+			//   ctx.moveTo(x, y);
+			//   ctx.fillRect(x - r, y - r, r + r, r + r);
+			//   ctx.closePath();
+			// }
+
+			// ctx.lineWidth = 2;
+			// ctx.strokeStyle = '#000';
+
+			// ctx.beginPath();
+
+			// // ctx.moveTo(10,10);
+			// //ctx.quadraticCurveTo(50, 200, 400, 30);
+			// ctx.bezierCurveTo(10,10, 50, 200, 400, 30);
+
+			// ctx.stroke();
+			// ctx.closePath();
+
+			// pixel(ctx, 10, 10, 7, '#f63')
+			// pixel(ctx, 50, 200, 7, '#f63');
+			// pixel(ctx, 400, 30, 7, '#f63');
+
+			// canvas.addEventListener('mousemove', ev => {
+			//   ctx.beginPath();
+			//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+			//   ctx.bezierCurveTo(10,10, ev.clientX, ev.clientY, 400, 30);
+			//   ctx.stroke();
+			//   pixel(ctx, 10, 10, 7, '#f63')
+			//   pixel(ctx, ev.clientX-8, ev.clientY-8, 7, '#f63');
+			//   pixel(ctx, 400, 30, 7, '#f63');
+			// })
+
+      ctx.shadowColor = 'green'
+      ctx.shadowOffsetX = 10
+      ctx.shadowOffsetY = 10
+      ctx.shadowBlur = 15
+
+			function draw() {
+				ctx.clearRect(0, 0, 550, 350)
+				let x = range1.value
+				let y = range2.value
+
+				console.log('range1.value =', range1.value)
+				console.log('range2.value =', range2.value)
+
+				ctx.beginPath()
+
+				ctx.moveTo(50, 200)
+				ctx.quadraticCurveTo(x, y, 250, 220)
+
+				ctx.fillRect(50, 200, 10, 10)
+				ctx.fillRect(x, y, 10, 10)
+				ctx.fillRect(250, 220, 10, 10)
+
+				ctx.fillText(`x = ${x}, y=${y}`, 100, 30)
+				ctx.lineWidth = 1
+				ctx.strokeText(`x = ${x}, y=${y}`, 100, 30)
+				ctx.lineWidth = 5
+
+				ctx.stroke()
+
+				ctx.closePath()
+			}
+			setTimeout(draw, 0)
+		</script>
+
+		<div class="row">
+			x<input type="range" id="range1" min=0 max=350 oninput="draw()" />
+		</div>
+		<div class="row">
+			y<input type="range" id="range2" min=0 max=350 oninput="draw()" />
+		</div>
+	</body>
+</html>

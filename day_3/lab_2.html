@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<style>
+			canvas {
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="300"></canvas>
+		<script>
+			let canvas = document.querySelector('#canvas')
+			let ctx = canvas.getContext('2d')
+			console.log(ctx)
+
+			ctx.lineWidth = 1
+			ctx.lineStyle = 'red'
+			ctx.fillStyle = 'blue'
+			ctx.font = '35px sans-serif'
+
+      ctx.shadowColor = 'green'
+      ctx.shadowOffsetX = 10
+      ctx.shadowOffsetY = 10
+      ctx.shadowBlur = 15
+
+			function draw() {
+				ctx.clearRect(0, 0, 550, 350)
+
+				ctx.beginPath()
+
+				ctx.strokeText(nameInput.value, 100, 100)
+
+				ctx.stroke()
+
+				ctx.closePath()
+			}
+			setTimeout(draw, 0)
+		</script>
+
+		<div class="row">
+			<input type="text" id="nameInput" oninput="draw()" placeholder='ФИО' />
+		</div>
+	</body>
+</html>

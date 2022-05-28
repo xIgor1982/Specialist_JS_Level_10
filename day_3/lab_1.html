@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<style>
+			canvas {
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="300"></canvas>
+		<script>
+			let canvas = document.querySelector('#canvas')
+			let ctx = canvas.getContext('2d')
+
+			const rand = (a, b) => Math.round(Math.random() * (b - a) + a)
+			const c = (a = 0, b = 255) => rand(a, b)
+
+			console.log(ctx)
+
+			const data = [23, 56, 100, 35, 15]
+
+			ctx.fillStyle = '#369'
+			data.forEach((item, index) => {
+				ctx.fillRect(
+					10 + index * 100,
+					canvas.height,
+					canvas.width / data.length - 20,
+					-item * ((Math.max(...data) * 10) / canvas.height)
+				)
+			})
+		</script>
+	</body>
+</html>
